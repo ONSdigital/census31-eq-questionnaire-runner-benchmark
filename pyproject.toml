@@ -1,7 +1,7 @@
 [tool.poetry]
-name = "eq-survey-runner-benchmark"
+name = "census31-eq-questionnaire-runner-benchmark"
 version = "1.0.0"
-description = "ONS Digital eQ Survey Runner Benchmark App"
+description = "Census eQ Questionnaire Runner Benchmark App"
 authors = ["ONSDigital"]
 package-mode = false
 

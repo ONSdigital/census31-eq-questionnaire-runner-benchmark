@@ -1,16 +1,16 @@
 
-# EQ Performance Benchmark
+# Census EQ Questionnaire Runner Benchmark
 
-This is a performance benchmarking tool designed to measure the performance of [EQ Survey Runner](https://github.com/ONSDigital/eq-survey-runner) using [locust](https://locust.io/).
+A performance benchmarking tool designed to measure the performance of [Census EQ Questionnaire Runner](https://github.com/ONSdigital/census31-eq-questionnaire-runner) using [Locust](https://locust.io/).
 
-This repository was heavily inspired by the [census performance tests](https://github.com/ONSdigital/census-eq-performance-tests).
+This repository was cloned from [EQ Survery Runner Benchmark](https://github.com/ONSdigital/eq-survey-runner-benchmark).
 
 ## Installation
 
 On MacOSX Catalina (10.15) if the Python packages fail to install there may be two versions of command line tools SDK present(`MacOSX10.15.sdk` and `MacOSX10.14.sdk`).
 You need to remove 10.14 version by using:
 
-```
+```bash
 sudo rm -rf /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk
 ```
 
@@ -23,7 +23,9 @@ To run a benchmark, use:
 ```bash
 poetry run ./run.sh <REQUESTS_JSON> <INCLUDE_SCHEMA_URL_IN_TOKEN: Optional> <HOST: Optional>
 ```
+
 e.g.
+
 ```bash
 poetry run ./run.sh requests/test_checkbox.json
 ```
@@ -54,14 +56,16 @@ Open the network inspector in Chrome or Firefox and ensure 'preserve log' is tic
 
 **Important:** The captured test should not include the `/session` endpoint.
 
-After the test is complete, right-click on one of the requests in the network inspector and save the log as a HAR file. 
+After the test is complete, right-click on one of the requests in the network inspector and save the log as a HAR file.
 
 To generate a requests file from the HAR file run:
 
 ```bash
 poetry run python generate_requests.py <HAR_FILEPATH> <REQUESTS_FILEPATH> <SCHEMA_NAME>
 ```
+
 e.g.
+
 ```bash
 poetry run python generate_requests.py requests.har requests/test_checkbox.json test_checkbox
 ```
@@ -76,7 +80,7 @@ Our current implementation requires us to manually add in an element called "red
 
 For example in the census household survey we have a GET with the following
 
-```
+```json
  {
     "method": "GET",
     "url": "/questionnaire/household/{person_1_list_id}/add-or-edit-primary-person/"
@@ -85,20 +89,19 @@ For example in the census household survey we have a GET with the following
 
 We naturally need to know {person_1_list_id}, which can be obtained from the preceding POST. This would look similar to the following (remember dynamic list_item_id generation)
 
-```
+```bash
 questionnaire/household/NZNuza/individual-interstitial/
 ```
 
 Notice the "NZNuza", this is the list_item_id value and we can see its in position 3. To harvest this value we put in our "redirect_route" element and a path value matching the key to that position
 
-```
+```json
 "redirect_route": "/questionnaire/household/{person_1_list_id}/add-or-edit-primary-person/"
-
 ```
 
 So putting it all together we would get
 
-```
+```json
 {
     "method": "POST",
     "url": "/questionnaire/primary-person-list-collector/",
@@ -119,13 +122,14 @@ N.B Although the above example uses the same url in the redirect as the GET, it 
 Manually adding in a redirect is only needed once for each list_item_id and you can do multiple at the same time.
 
 ---
+
 ## Deployment with [Helm](https://helm.sh/)
 
 To deploy this application with helm, you must have a kubernetes cluster already running and be logged into the cluster.
 
 Log in to the cluster using:
 
-```
+```bash
 gcloud container clusters get-credentials survey-runner --region <region> --project <gcp_project_id>
 ```
 
@@ -135,18 +139,17 @@ You need to have Helm installed locally
 
 2. Install Helm Tiller plugin for _Tillerless_ deploys `helm plugin install https://github.com/rimusz/helm-tiller`
 
-
 ### Deploying the app
 
 To deploy the app to the cluster, run the following command:
 
-```
+```bash
 helm tiller run \
 -    helm upgrade --install \
 -    runner-benchmark \
 -    k8s/helm \
 -    --set host=${HOST} \
--    --set container.image=${DOCKER_REGISTRY}/eq-survey-runner-benchmark:${IMAGE_TAG}
+-    --set container.image=${DOCKER_REGISTRY}/census31-eq-questionnaire-runner-benchmark:${IMAGE_TAG}
 ```
 
 If you want to vary the default parameters Locust uses on start, you can specify them using the following variables:
@@ -158,13 +161,14 @@ If you want to vary the default parameters Locust uses on start, you can specify
   - defaults to 1
 - userWaitTimeMaxSeconds - The maximum delay between each user's GET requests
   - defaults to 2
-- includeSchemaUrlInToken - Optional boolean value that allows the schema to be loaded via a schema_url included in the launch claim. The schema being loaded will need to be present in our cloud bucket however this is not validated, so check the storage bucket at `https://storage.googleapis.com/eq-questionnaire-schemas/{schema_name}.json` before setting this parameter to `true`.
+- includeSchemaUrlInToken - Optional boolean value that allows the schema to be loaded via a schema_url included in the launch claim. The schema being loaded will need to be present in our cloud bucket however this is not validated, so check the storage bucket at `https://storage.googleapis.com/census31-eq-questionnaire-schemas/{schema_name}.json` before setting this parameter to `true`.
   - defaults to `false`
 - output.bucket - Name of the GCS bucket in which the output should be stored.
 - output.directory - Name of the directory within the GCS bucket in which the output should be stored.
 
 e.g
-```
+
+```bash
 helm tiller run \
 -    helm upgrade --install \
 -    runner-benchmark \
@@ -198,23 +202,28 @@ Once the service account has been created you will need to download its JSON key
 ### Download Benchmark Results
 
 If you are running the script using a service account you will need to set the path to the JSON key file as an evironment variable (see Pre-requisites above):
+
 ```bash
 export GOOGLE_APPLICATION_CREDENTIALS="<path_to_json_credentials_file>"
 ```
 
 To run the script and download results:
+
 ```bash
 OUTPUT_BUCKET="<bucket_name>" poetry run python -m scripts.get_benchmark_results
 ```
 
 This script also accepts optional `NUMBER_OF_DAYS` and `OUTPUT_DIR` environment variables which allows the user to download a subset of results and set
 a specific output directory e.g.
+
 ```bash
 OUTPUT_BUCKET="<bucket_name>" NUMBER_OF_DAYS=<number_of_days> OUTPUT_DIR="<output_directory>" poetry run python -m scripts.get_benchmark_results
 ```
 
 ### Summarise the Daily Benchmark results
+
 You can get a breakdown of the average response times for a result set by doing:
+
 ```bash
 OUTPUT_DIR="outputs/daily-test" \
 OUTPUT_DATE="2020-01-01" \
@@ -222,7 +231,8 @@ poetry run python -m scripts.get_summary
 ```
 
 This will output something like:
-```
+
+```bash
 2020-01-01
 ---
 Percentile Averages:
@@ -238,20 +248,22 @@ POSTs (99th): 467ms
 Total Requests: 307,207
 Total Failures: 0
 Error Percentage: 0.0%
-
 ```
 
 If `OUTPUT_DATE` is not provided, then it will output a summary for all results within the provided directory.
 
 ### Summarise the Stress Test results:
+
 To get a breakdown of results for a stress test use the `get_aggregated_summary` script. This accepts a folder containing
 results as a parameter, and will provide aggregate totals at the folder level:
+
 ```bash
 OUTPUT_DIR="outputs/stress-test" poetry run python -m scripts.get_aggregated_summary
 ```
 
 This will output something like:
-```
+
+```bash
 ---
 Percentile Averages:
 50th: 76ms
@@ -274,6 +286,7 @@ The `visualise_results` script will run against any benchmark results stored in 
 Optionally, you can also specify the number of days to visualise the results for.
 
 For example, to visualise results for the last 7 days:
+
 ```bash
 OUTPUT_DIR="outputs/daily-test" \
 NUMBER_OF_DAYS="7" \
@@ -281,7 +294,6 @@ poetry run python -m scripts.visualise_results
 ```
 
 A line chart will be generated and saved as `performance_graph.png`.
-
 
 ## Future Improvements
 
