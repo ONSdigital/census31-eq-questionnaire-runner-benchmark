@@ -3,7 +3,7 @@
 
 A performance benchmarking tool designed to measure the performance of [Census EQ Questionnaire Runner](https://github.com/ONSdigital/census31-eq-questionnaire-runner) using [Locust](https://locust.io/).
 
-This repository was cloned from [EQ Survery Runner Benchmark](https://github.com/ONSdigital/eq-survey-runner-benchmark).
+This repository was cloned from [EQ Survey Runner Benchmark](https://github.com/ONSdigital/eq-survey-runner-benchmark).
 
 ## Installation
 
