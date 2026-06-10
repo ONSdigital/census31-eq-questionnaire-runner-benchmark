@@ -201,7 +201,7 @@ Once the service account has been created you will need to download its JSON key
 
 ### Download Benchmark Results
 
-If you are running the script using a service account you will need to set the path to the JSON key file as an evironment variable (see Pre-requisites above):
+If you are running the script using a service account you will need to set the path to the JSON key file as an environment variable (see Pre-requisites above):
 
 ```bash
 export GOOGLE_APPLICATION_CREDENTIALS="<path_to_json_credentials_file>"
