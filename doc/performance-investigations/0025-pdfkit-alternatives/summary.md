@@ -19,7 +19,7 @@ the performance, maintainability and security of this approach in the long term.
 This investigation looks at `weasyprint` and `xhtml2pdf` as alternatives to understand any performance benefit from
 moving over.
 
-# Run #1 (moderate load)
+## Run #1 (moderate load)
 
 ## Runner settings
 
@@ -34,20 +34,20 @@ moving over.
 
 ## Benchmark profile
 
-| Option                 | Value                                                                                                                                       |  
-|------------------------|---------------------------------------------------------------------------------------------------------------------------------------------|  
-| Requests file          | test_benchmark_business_happy_path.json / test_benchmark_business_happy_path_xhtml2pdf.json / test_benchmark_business_happy_path_weasy.json |  
-| Run time               | 10m                                                                                                                                         |  
-| User wait time minimum | 1                                                                                                                                           |  
-| User wait time maximum | 2                                                                                                                                           |  
-| Clients                | 50                                                                                                                                          |  
-| Hatch rate             | 50                                                                                                                                          |  
+| Option                 | Value                                                                                                                                       |
+|------------------------|---------------------------------------------------------------------------------------------------------------------------------------------|
+| Requests file          | test_benchmark_business_happy_path.json / test_benchmark_business_happy_path_xhtml2pdf.json / test_benchmark_business_happy_path_weasy.json |
+| Run time               | 10m                                                                                                                                         |
+| User wait time minimum | 1                                                                                                                                           |
+| User wait time maximum | 2                                                                                                                                           |
+| Clients                | 50                                                                                                                                          |
+| Hatch rate             | 50                                                                                                                                          |
 
 ## Results
 
-| Environment                             | Requests per second | GETs (99th) (ms) | POSTs (99th) (ms) | PDF GETs (50th) (ms) | PDF GETs (90th) (ms) | PDF GETs (95th) (ms) | PDF GETs (99th) (ms) | PDF GETs (99.9th) (ms) | PDF GETs (100th) (ms) | 99th percentile Max CPU Usage (%) | Total Requests | Total Failures | Outputs                                              |  
+| Environment                             | Requests per second | GETs (99th) (ms) | POSTs (99th) (ms) | PDF GETs (50th) (ms) | PDF GETs (90th) (ms) | PDF GETs (95th) (ms) | PDF GETs (99th) (ms) | PDF GETs (99.9th) (ms) | PDF GETs (100th) (ms) | 99th percentile Max CPU Usage (%) | Total Requests | Total Failures | Outputs                                              |
 |-----------------------------------------|---------------------|------------------|-------------------|----------------------|----------------------|----------------------|----------------------|------------------------|-----------------------|-----------------------------------|----------------|----------------|------------------------------------------------------|
-| Baseline with pdfkit                    | 57.60               | 362              | 133               | 1600                 | 1900                 | 2500                 | 3600                 | 4100                   | 4100                  | 30                                | 34,445         | 0              | [outputs](outputs/baseline/2026-01-26T13:41:05)      |  
+| Baseline with pdfkit                    | 57.60               | 362              | 133               | 1600                 | 1900                 | 2500                 | 3600                 | 4100                   | 4100                  | 30                                | 34,445         | 0              | [outputs](outputs/baseline/2026-01-26T13:41:05)      |
 | xhtml2pdf with custom CSS file (Run 1)  | 58.60               | 305              | 126               | 500                  | 640                  | 760                  | 970                  | 990                    | 990                   | 22                                | 35,032         | 0              | [outputs](outputs/investigation/2026-01-28T16:12:30) |
 | xhtml2pdf with custom CSS file (Run 2)  | 58.78               | 258              | 139               | 540                  | 730                  | 790                  | 1100                 | 1200                   | 1200                  | 23                                | 35,109         | 0              | [outputs](outputs/investigation/2026-01-29T07:44:30) |
 | weasyprint with custom CSS file (Run 1) | 58.20               | 291              | 139               | 1400                 | 2200                 | 2700                 | 3300                 | 3600                   | 3600                  | 29                                | 34,797         | 0              | [outputs](outputs/investigation/2026-01-29T11:10:19) |
@@ -62,9 +62,9 @@ Observations:
 * xhtml2pdf was the fastest option here, with median PDF GET response times of ~500-540ms, and 99th percentile times
   of ~970-1100ms. However, this is using a basic, stripped-down CSS file to get a reasonable output.
 
-# Run #2 (heavy load)
+## Run #2 (heavy load)
 
-## Runner settings
+## Runner settings (run #2)
 
 | Setting       | Value                                                                                             |
 |---------------|---------------------------------------------------------------------------------------------------|
@@ -75,22 +75,22 @@ Observations:
 | Memory        | 4G                                                                                                |
 | Draft PR      | [EQS-512-alternatives-to-pdfkit](https://github.com/ONSdigital/eq-questionnaire-runner/pull/1816) |
 
-## Benchmark profile
+## Benchmark profile (run #2)
 
-| Option                 | Value                                                                                                                                       |  
-|------------------------|---------------------------------------------------------------------------------------------------------------------------------------------|  
-| Requests file          | test_benchmark_business_happy_path.json / test_benchmark_business_happy_path_xhtml2pdf.json / test_benchmark_business_happy_path_weasy.json |  
-| Run time               | 20m                                                                                                                                         |  
-| User wait time minimum | 1                                                                                                                                           |  
-| User wait time maximum | 2                                                                                                                                           |  
-| Clients                | 200                                                                                                                                         |  
-| Hatch rate             | 200                                                                                                                                         |  
+| Option                 | Value                                                                                                                                       |
+|------------------------|---------------------------------------------------------------------------------------------------------------------------------------------|
+| Requests file          | test_benchmark_business_happy_path.json / test_benchmark_business_happy_path_xhtml2pdf.json / test_benchmark_business_happy_path_weasy.json |
+| Run time               | 20m                                                                                                                                         |
+| User wait time minimum | 1                                                                                                                                           |
+| User wait time maximum | 2                                                                                                                                           |
+| Clients                | 200                                                                                                                                         |
+| Hatch rate             | 200                                                                                                                                         |
 
-## Results
+## Results (run #2)
 
-| Environment                             | Requests per second | GETs (99th) (ms) | POSTs (99th) (ms) | PDF GETs (50th) (ms) | PDF GETs (90th) (ms) | PDF GETs (95th) (ms) | PDF GETs (99th) (ms) | PDF GETs (99.9th) (ms) | PDF GETs (100th) (ms) | 99th percentile Max CPU Usage (%) | Total Requests | Total Failures | Outputs                                              |  
+| Environment                             | Requests per second | GETs (99th) (ms) | POSTs (99th) (ms) | PDF GETs (50th) (ms) | PDF GETs (90th) (ms) | PDF GETs (95th) (ms) | PDF GETs (99th) (ms) | PDF GETs (99.9th) (ms) | PDF GETs (100th) (ms) | 99th percentile Max CPU Usage (%) | Total Requests | Total Failures | Outputs                                              |
 |-----------------------------------------|---------------------|------------------|-------------------|----------------------|----------------------|----------------------|----------------------|------------------------|-----------------------|-----------------------------------|----------------|----------------|------------------------------------------------------|
-| Baseline with pdfkit                    | 199.63              | 1958             | 973               | 2300                 | 7900                 | 11000                | 13000                | 16000                  | 16000                 | 71                                | 239,134        | 0              | [outputs](outputs/baseline/2026-01-30T11:47:22)      |  
+| Baseline with pdfkit                    | 199.63              | 1958             | 973               | 2300                 | 7900                 | 11000                | 13000                | 16000                  | 16000                 | 71                                | 239,134        | 0              | [outputs](outputs/baseline/2026-01-30T11:47:22)      |
 | xhtml2pdf with custom CSS file (Run 1)  | 206.45              | 2988             | 581               | 770                  | 1400                 | 1700                 | 2200                 | 2900                   | 3300                  | 80                                | 247,165        | 0              | [outputs](outputs/investigation/2026-01-30T12:53:37) |
 | xhtml2pdf with custom CSS file (Run 2)  | 206.27              | 1120             | 571               | 1100                 | 2100                 | 2600                 | 3700                 | 4600                   | 5300                  | 82                                | 247,000        | 0              | [outputs](outputs/investigation/2026-02-03T09:01:19) |
 | weasyprint with custom CSS file (Run 1) | 202.44              | 1665             | 750               | 2000                 | 5600                 | 7700                 | 15000                | 19000                  | 19000                 | 87                                | 242,855        | 0              | [outputs](outputs/investigation/2026-01-30T13:27:52) |
@@ -114,18 +114,18 @@ Observations:
   prevent tainting these results). A separate ticket will be raised to look into these, as it could be caused by a
   myriad of factors unrelated to the PDF generation itself.
 
-# Conclusion and recommendations
+## Conclusion and recommendations
 
 ## Option 1: Do nothing
 
-### Advantages
+### Advantages (Option 1)
 
 * This is the safest option, as `pdfkit` is currently ticking along okay within a 'reasonable' response time, although
   there are currently no NFRs for response times (as far as I know) so it's hard to say what is acceptable.
 * We have an established implementation
 * No development effort required & less risk of introducing new bugs
 
-### Considerations
+### Considerations (Option 1)
 
 * This does not address the long-term concerns around maintainability and security - our Dockerfile now has several
   critical vulnerabilities due to the outdated `wkhtmltopdf` binary.
@@ -133,14 +133,14 @@ Observations:
 
 ## Option 2: Move to weasyprint
 
-### Advantages
+### Advantages (Option 2)
 
 * `weasyprint` produces a reasonable output and has better support for modern CSS features than `xhtml2pdf`
 * There appears to be a notable performance improvement using `weasyprint` since the original Spike
   `0018-pdf-weasyprint-pdfkit`. This is possibly due to improvements in the weasyprint library itself and makes use of
   newer features in the latest version of the library.
 
-### Considerations:
+### Considerations (Option 2)
 
 * The big consideration here is the increased CPU usage compared to the other packages, which could impact overall
   application performance under load.
@@ -162,13 +162,13 @@ Observations:
 
 ## Option 3: Move to xhtml2pdf
 
-### Advantages:
+### Advantages
 
 * By far the best performance of the three options tested here
 * `xhtml2pdf` is more lightweight than `weasyprint`, resulting in lower CPU usage and potentially better overall
   application performance under load.
 
-### Considerations:
+### Considerations
 
 * This is a big one - it is not as CSS-compliant as `weasyprint`, and has limited support for modern CSS features - it
   uses a small subset of CSS.
@@ -208,7 +208,7 @@ Observations:
 * This would need DS and accessibility considerations, but could be a low-effort way to improve the UX while we explore
   other options?
 
-# Next steps
+## Next steps
 
 * Given the vulnerabilities in the current `wkhtmltopdf` binary, it may be worth considering moving away from `pdfkit`
   regardless of performance considerations. I think it might be worth exploring options 2, 4 and 7 in parallel to get a

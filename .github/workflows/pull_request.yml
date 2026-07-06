@@ -12,8 +12,10 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
       - run: |
-          echo "PYTHON_VERSION=$(cat .python-version)" >> $GITHUB_ENV
+          echo "PYTHON_VERSION=$(cat .python-version)" >> "$GITHUB_ENV"
       - uses: actions/setup-python@42375524e23c412d93fb67b49958b491fce71c38 # v5.4.0
         with:
           python-version: ${{ env.PYTHON_VERSION }}
@@ -25,7 +27,7 @@ jobs:
       - uses: actions/setup-python@42375524e23c412d93fb67b49958b491fce71c38 # v5.4.0
         with:
           python-version: ${{ env.PYTHON_VERSION }}
-          cache: 'poetry'
+          cache: "poetry"
       - name: Install virtual environment
         run: poetry install
       - name: Lint scripts
@@ -36,8 +38,9 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
-      - run:
-          echo "PYTHON_VERSION=$(cat .python-version)" >> $GITHUB_ENV
+        with:
+          persist-credentials: false
+      - run: echo "PYTHON_VERSION=$(cat .python-version)" >> "$GITHUB_ENV"
       - uses: actions/setup-python@42375524e23c412d93fb67b49958b491fce71c38 # v5.4.0
         with:
           python-version: ${{ env.PYTHON_VERSION }}

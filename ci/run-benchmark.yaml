@@ -10,7 +10,7 @@ inputs:
     optional: true
 params:
   PROJECT_ID:
-  REGION: 'europe-west2'
+  REGION: "europe-west2"
   REQUESTS_JSON:
   LOCUST_OPTIONS:
   RUNNER_FULLY_QUALIFIED_DOMAIN_NAME:

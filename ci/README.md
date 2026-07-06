@@ -11,6 +11,7 @@ fly login -t <target-concourse>
 ```
 
 ## Run Benchmark
+
 The following env vars must be set:
 
 - PROJECT_ID
@@ -27,9 +28,11 @@ The following env vars must be set:
 IMAGE_TAG can be passed as an environment variable or as a file input located at `./eq-survey-runner-benchmark-image/tag`.
 
 The following env var already has a sensible default, but can be set with an alternative value if needed:
+
 - REGION
 
-### Provisioning
+### Provisioning benchmark task
+
 Use the `fly execute` command to run the task.
 
 ```sh
@@ -51,17 +54,20 @@ fly -t census-eq execute \
 ```
 
 ## Output results to Slack
+
 The following env vars must be set:
 
 - OUTPUT_DIR
 - SLACK_CHANNEL_ID
 
 The following env var already has a sensible default, but can be set with an alternative value if needed:
+
 - OUTPUT_BUCKET
 - SLACK_AUTH_TOKEN
 - NUMBER_OF_DAYS
 
-### Provisioning
+### Provisioning Slack output task
+
 Use the `fly execute` command to run the task.
 
 ```sh

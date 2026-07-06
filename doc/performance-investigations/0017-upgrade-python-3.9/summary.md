@@ -5,7 +5,7 @@ Python's latest minor release version is 3.9. EQ Census is currently running on 
 ## Benchmark profile
 
 | Option                 | Value                        |
-| ---------------------- | ---------------------------- |
+|------------------------|------------------------------|
 | Requests file          | census_household_gb_eng.json |
 | Run time               | 60m                          |
 | User wait time minimum | 1                            |
@@ -20,7 +20,7 @@ Python's latest minor release version is 3.9. EQ Census is currently running on 
 Results based on 99th percentile timings.
 
 | Metric              | Baseline | Investigation |
-| ------------------- | -------- | ------------- |
+|---------------------|----------|---------------|
 | Questionnaire GETs  | 198ms    | 154ms         |
 | Questionnaire POSTs | 299ms    | 250ms         |
 | All requests        | 247ms    | 202ms         |

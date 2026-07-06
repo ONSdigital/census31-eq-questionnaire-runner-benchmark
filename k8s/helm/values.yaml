@@ -7,12 +7,12 @@ container:
   image: europe-west2-docker.pkg.dev/ons-eq-ci/docker-images/eq-benchmark-deploy-image:latest
   pullPolicy: Always
 
-host: ''
-requestsJson: 'requests/test_checkbox.json'
+host: ""
+requestsJson: "requests/test_checkbox.json"
 userWaitTimeMinSeconds: 1
 userWaitTimeMaxSeconds: 2
-includeSchemaUrlInToken: 'false'
-locustOptions: '--headless --users 800 --spawn-rate 10 --loglevel=CRITICAL --run-time=2h --only-summary'
+includeSchemaUrlInToken: "false"
+locustOptions: "--headless --users 800 --spawn-rate 10 --loglevel=CRITICAL --run-time=2h --only-summary"
 output:
-  bucket: ''
-  directory: ''
+  bucket: ""
+  directory: ""

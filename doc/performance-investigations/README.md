@@ -18,13 +18,13 @@ Depending on the duration of the tests, you may want to consider running them mo
 
 The simplest configuration to run is captured in `run.sh` which defaults to one client with no wait time:
 
-```
+```sh
 ./run.sh requests/<requests_file> https://<runner_url> <duration> <output_file_prefix>
 ```
 
 `duration` can be in seconds (s), minutes (m), or hours (h). For example:
 
-```
+```sh
 ./run.sh requests/test_checkbox https://runner.co.uk 10m baseline
 ```
 
@@ -35,14 +35,17 @@ More in-depth configuration is explained in the top-level [Readme](/README.md).
 You can use the [get_summary.py](/scripts/get_summary.py) or [get_aggregated_summary.py](/scripts/get_aggregated_summary.py) script to extract high level metrics from the Locust distributions CSV.
 
 The expected folder structure is:
-```
+
+```text
 outputs-folder/
   named-folder/
     dated-folder/
       output-stats.csv
 ```
+
 For example:
-```
+
+```text
 outputs/
   baseline/
     2020-01-01T00:00:00/
@@ -50,19 +53,20 @@ outputs/
 ```
 
 To get a summary for each dated folder, run the following:
-```
-OUTPUT_DIR=outputs/baseline poetry run python -m scripts.get_summary 
+
+```sh
+OUTPUT_DIR=outputs/baseline poetry run python -m scripts.get_summary
 ```
 
 To get an aggregated summary for all dated folders, run the following:
-```
+
+```sh
 OUTPUT_DIR=outputs/baseline poetry run python -m scripts.get_aggregated_summary
 ```
 
-
 Example output:
 
-```
+```text
 Percentile Averages:
 50th: 74ms
 90th: 140ms

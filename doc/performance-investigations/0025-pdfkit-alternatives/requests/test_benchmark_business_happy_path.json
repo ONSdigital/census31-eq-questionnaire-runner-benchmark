@@ -424,7 +424,7 @@
             "data": {
                 "company-or-branch-name": "eQ insurance"
             },
-            "redirect_route":"/questionnaire/companies/{company_1}/companies-repeating-block-1/"
+            "redirect_route": "/questionnaire/companies/{company_1}/companies-repeating-block-1/"
         },
         {
             "method": "GET",

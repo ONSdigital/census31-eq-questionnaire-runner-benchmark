@@ -8,36 +8,34 @@ In each test, runner version v3.94.0 was upgraded to v3.95.0 The only exception 
 
 ## Runner settings
 
-| Setting | Value |
-| --- | ---| 
-| Concurrency | 115 |
-| Max instances   | 50 |
-| Min instances | 25 |
-| CPU | 4 |
-| Memory | 4G |
-| Version | 3.94.0 <-> 3.95.0|
-
+| Setting       | Value             |
+|---------------|-------------------|
+| Concurrency   | 115               |
+| Max instances | 50                |
+| Min instances | 25                |
+| CPU           | 4                 |
+| Memory        | 4G                |
+| Version       | 3.94.0 <-> 3.95.0 |
 
 ## Benchmark settings
 
-| Setting | Value |
-| --- | ---| 
-| Clients per instance | 100 |
-| Clients hatch rate   | 50 |
-| Wait time minimum | 1 |
-| Wait time maximum | 2 |
-| Requests JSON | test_benchmark_business.json |
-| Runtime | 30m |
-| Load injectors | 22 |
+| Setting              | Value                        |
+|----------------------|------------------------------|
+| Clients per instance | 100                          |
+| Clients hatch rate   | 50                           |
+| Wait time minimum    | 1                            |
+| Wait time maximum    | 2                            |
+| Requests JSON        | test_benchmark_business.json |
+| Runtime              | 30m                          |
+| Load injectors       | 22                           |
 
 ## Initial Benchmark
 
 Prior to the test a benchmark was run to confirm the setup of eq-stress-test was relative to previous tests. The 99th Percentile was quicker than expected at 157ms, but was inside an acceptable range. A small number of 404s were recorded during the initial test (8 in 3 million requests) but were not investigated further.
 
-| Stress Test |Runner Concurrency |Runner Instances | Run Time| Clients per instance | Requests per second | 99th percentile Max CPU Usage (%) | 99th percentile response time (ms) | Error rate (%) | Output |
-| --- | --- | --- | --- |--- | --- | --- | --- | --- | --- |
-| benchmark | 115 | 1 | 20 mins | 100  | 2.5k | 80  | 157 | 0.000 | [output](https://console.cloud.google.com/storage/browser/eq-stress-injector-07122021-outputs/stress-test/2022-02-09T19:23:30/) |
-
+| Stress Test | Runner Concurrency | Runner Instances | Run Time | Clients per instance | Requests per second | 99th percentile Max CPU Usage (%) | 99th percentile response time (ms) | Error rate (%) | Output                                                                                                                          |
+|-------------|--------------------|------------------|----------|----------------------|---------------------|-----------------------------------|------------------------------------|----------------|---------------------------------------------------------------------------------------------------------------------------------|
+| benchmark   | 115                | 1                | 20 mins  | 100                  | 2.5k                | 80                                | 157                                | 0.000          | [output](https://console.cloud.google.com/storage/browser/eq-stress-injector-07122021-outputs/stress-test/2022-02-09T19:23:30/) |
 
 ## Results
 
@@ -49,43 +47,41 @@ Although deployment was successful in each test it was not completely seemless. 
 
 The table below shows the amount of requests in that time period and the count of requests breaking particular thresholds.
 
-| Environment | Total requests | Request latency >2s | Request latency >5s | Request latency >10s | Date/Time | Output |
-| --- | --- | --- | --- |--- | --- | --- |
-| eq-stress-test-340815 (Test1) | 45,034 | 6017 | 3094 | 58 | 09-02-2022 20:00 |[output](https://console.cloud.google.com/storage/browser/eq-stress-injector-07122021-outputs/stress-test/2022-02-09T20:00:45/) |
-| eq-stress-test-340815 (Test2) | 43,885 | 7540 | 5453 | 771 | 10-02-2022 13:18:38 |[output](https://console.cloud.google.com/storage/browser/eq-stress-injector-07122021-outputs/stress-test/2022-02-10T13:18:38/) |
-| Trial run | 45,059 | 7443 | 3385 | 228 | 09-02-2022 13:14:03 | ephemeral GCP project |
-
+| Environment                   | Total requests | Request latency >2s | Request latency >5s | Request latency >10s | Date/Time           | Output                                                                                                                          |
+|-------------------------------|----------------|---------------------|---------------------|----------------------|---------------------|---------------------------------------------------------------------------------------------------------------------------------|
+| eq-stress-test-340815 (Test1) | 45,034         | 6017                | 3094                | 58                   | 09-02-2022 20:00    | [output](https://console.cloud.google.com/storage/browser/eq-stress-injector-07122021-outputs/stress-test/2022-02-09T20:00:45/) |
+| eq-stress-test-340815 (Test2) | 43,885         | 7540                | 5453                | 771                  | 10-02-2022 13:18:38 | [output](https://console.cloud.google.com/storage/browser/eq-stress-injector-07122021-outputs/stress-test/2022-02-10T13:18:38/) |
+| Trial run                     | 45,059         | 7443                | 3385                | 228                  | 09-02-2022 13:14:03 | ephemeral GCP project                                                                                                           |
 
 ## Visualisations
 
 Test1
 
-![](0004_test-1-response-time-and-requests.png)
-![](0004_test-1-instances.png)
-![](0004_test-1-cpu.png)
+![Figure](0004_test-1-response-time-and-requests.png)
+![Figure](0004_test-1-instances.png)
+![Figure](0004_test-1-cpu.png)
 
 Test2
 
-![](0004_test-2-response-time-and-requests.png)
-![](0004_test-2-instances.png)
-![](0004_test-2-cpu.png)
+![Figure](0004_test-2-response-time-and-requests.png)
+![Figure](0004_test-2-instances.png)
+![Figure](0004_test-2-cpu.png)
 
 Trial
 
-![](0004_trial-response-time-and-requests.png)
-![](0004_trial-instances.png)
-![](0004_trial-cpu.png)
+![Figure](0004_trial-response-time-and-requests.png)
+![Figure](0004_trial-instances.png)
+![Figure](0004_trial-cpu.png)
 
 ## Conclusion
+
 Whether it was the test settings or the timeliness of the instance switching there does seem to be a gap lasting approximately 20 seconds when the new instance has significantly higher latency.
 
 The results of the test showed that 15% of requests at the time were above 2 seconds. In 2 of the tests aftershocks were also seen for the next 3-4 minutes, where a small proportion of requests also took greater than 2 seconds (approximately 50 requests).
 
-
 ## Next Steps
 
 - Investigate the reason behind the short term latency increase.
-
 
 ## Additional Tests
 
@@ -93,8 +89,8 @@ After the results above it was decided to reduce the load and see if it had the 
 
 The result was the same, out of 32,466 requests 3550 broke the 2 second threshold.
 
-![](0004_test-3-response-time-and-requests.png)
-![](0004_test-3-instances.png)
-![](0004_test-3-cpu.png)
+![Figure](0004_test-3-response-time-and-requests.png)
+![Figure](0004_test-3-instances.png)
+![Figure](0004_test-3-cpu.png)
 
-https://console.cloud.google.com/storage/browser/eq-stress-injector-07122021-outputs/stress-test/2022-02-19T20:36:15
+<https://console.cloud.google.com/storage/browser/eq-stress-injector-07122021-outputs/stress-test/2022-02-19T20:36:15>

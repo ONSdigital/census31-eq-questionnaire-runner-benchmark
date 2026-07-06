@@ -1,6 +1,7 @@
 # Stress Test November 2020
 
 A stress test was carried out on November 12th 2020 to test changes made since the last test. The aim of these changes was to reduce errors and increase the maximum requests that can be served:
+
 - Sessions are now in Datastore (previously Redis)
 - The application runs using Gunicorn threads (previously Gunicorn async)
 - As we are now using threads, Datastore is now using gRPC (previously HTTP)
@@ -13,39 +14,39 @@ Benchmark version: [v1.0.0](https://github.com/ONSdigital/eq-survey-runner-bench
 
 ## Benchmark settings
 
-| Setting | Value |
-| --- | ---| 
-| Clients per instance | 200 |
-| Clients hatch rate   | 200 |
-| Wait time minimum | 1 |
-| Wait time maximum | 2 |
-| Requests JSON | census_household_gb_eng.json |
-| Runtime | 20m |
+| Setting              | Value                        |
+|----------------------|------------------------------|
+| Clients per instance | 200                          |
+| Clients hatch rate   | 200                          |
+| Wait time minimum    | 1                            |
+| Wait time maximum    | 2                            |
+| Requests JSON        | census_household_gb_eng.json |
+| Runtime              | 20m                          |
 
 ## Results
 
-| Load injector instances | Requests per second | CPU Usage (vCPU) | 99th percentile response time (ms) | Error rate (%) | Output |
-| --- | --- | --- | --- | --- | --- |
-| 60  | 19,000 | 390  | 135  | 0 |[output](https://console.cloud.google.com/storage/browser/eq-stress-test-load-injectors-benchmark-outputs/stress-test-november-2020/2020-11-12T13:12:07)|
-| 70  | 22,000 | 450  | 135  | 0 |[output](https://console.cloud.google.com/storage/browser/eq-stress-test-load-injectors-benchmark-outputs/stress-test-november-2020/2020-11-12T13:34:38/)|
-| 80  | 25,000 | 520  | 135  | 0 |[output](https://console.cloud.google.com/storage/browser/eq-stress-test-load-injectors-benchmark-outputs/stress-test-november-2020/2020-11-12T13:56:58/)|
-| 90  | 28,500 | 580  | 135  | 0 |[output](https://console.cloud.google.com/storage/browser/eq-stress-test-load-injectors-benchmark-outputs/stress-test-november-2020/2020-11-12T14:19:57/)|
-| 100 | 31,500 | 650  | 135  | 0 |[output](https://console.cloud.google.com/storage/browser/eq-stress-test-load-injectors-benchmark-outputs/stress-test-november-2020/2020-11-12T14:43:17/)|
-| 110 | 35,000 | 720  | 135  | 0 |[output](https://console.cloud.google.com/storage/browser/eq-stress-test-load-injectors-benchmark-outputs/stress-test-november-2020/2020-11-12T15:05:19/)|
-| 120 | 38,000 | 780  | 135  | 0 |[output](https://console.cloud.google.com/storage/browser/eq-stress-test-load-injectors-benchmark-outputs/stress-test-november-2020/2020-11-12T15:27:28/)|
-| 130 | 41,000 | 850  | 135  | 0 |[output](https://console.cloud.google.com/storage/browser/eq-stress-test-load-injectors-benchmark-outputs/stress-test-november-2020/2020-11-12T15:49:57/)|
-| 140 | 44,500 | 920  | 140  | 0 |[output](https://console.cloud.google.com/storage/browser/eq-stress-test-load-injectors-benchmark-outputs/stress-test-november-2020/2020-11-12T16:12:18/)|
-| 150 | 47,500 | 990  | 145  | 0 |[output](https://console.cloud.google.com/storage/browser/eq-stress-test-load-injectors-benchmark-outputs/stress-test-november-2020/2020-11-12T16:34:47/)|
-| 160 | 50,000 | 1070 | 155  | 0 |[output](https://console.cloud.google.com/storage/browser/eq-stress-test-load-injectors-benchmark-outputs/stress-test-november-2020/2020-11-12T16:57:27/)|
-| 170 | 53,500 | 1150 | 175  | 0.00000009 (6) |[output](https://console.cloud.google.com/storage/browser/eq-stress-test-load-injectors-benchmark-outputs/stress-test-november-2020/2020-11-12T17:20:17/)|
-| 180 | 56,500 | 1220 | 195  | 0.0000003 (15) |[output](https://console.cloud.google.com/storage/browser/eq-stress-test-load-injectors-benchmark-outputs/stress-test-november-2020/2020-11-12T17:42:51/)|
-| 190 | 59,500 | 1300 | 230  | 0.0000002 (12) |[output](https://console.cloud.google.com/storage/browser/eq-stress-test-load-injectors-benchmark-outputs/stress-test-november-2020/2020-11-12T18:06:27/)|
-| 200 | 63,000 | 1390 | 270  | 0.0000002 (17) |[output](https://console.cloud.google.com/storage/browser/eq-stress-test-load-injectors-benchmark-outputs/stress-test-november-2020/2020-11-12T18:29:30/)|
-| 210 | 65,000 | 1460 | 320  | 0 |[output](https://console.cloud.google.com/storage/browser/eq-stress-test-load-injectors-benchmark-outputs/stress-test-november-2020/2020-11-12T18:51:57/)|
-| 220 | 67,500 | 1530 | 390  | 0 |[output](https://console.cloud.google.com/storage/browser/eq-stress-test-load-injectors-benchmark-outputs/stress-test-november-2020/2020-11-12T19:14:59/)|
-| 230 | 70,000 | 1600 | 500  | 0 |[output](https://console.cloud.google.com/storage/browser/eq-stress-test-load-injectors-benchmark-outputs/stress-test-november-2020/2020-11-12T19:37:18/)|
-| 240 | 72,000 | 1660 | 750  | 0 |[output](https://console.cloud.google.com/storage/browser/eq-stress-test-load-injectors-benchmark-outputs/stress-test-november-2020/2020-11-12T19:59:47/)|
-| 250 | 74,000 | 1710 | 1000 | 0 |[output](https://console.cloud.google.com/storage/browser/eq-stress-test-load-injectors-benchmark-outputs/stress-test-november-2020/2020-11-12T20:22:28/)|
+| Load injector instances | Requests per second | CPU Usage (vCPU) | 99th percentile response time (ms) | Error rate (%) | Output                                                                                                                                                    |
+|-------------------------|---------------------|------------------|------------------------------------|----------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 60                      | 19,000              | 390              | 135                                | 0              | [output](https://console.cloud.google.com/storage/browser/eq-stress-test-load-injectors-benchmark-outputs/stress-test-november-2020/2020-11-12T13:12:07)  |
+| 70                      | 22,000              | 450              | 135                                | 0              | [output](https://console.cloud.google.com/storage/browser/eq-stress-test-load-injectors-benchmark-outputs/stress-test-november-2020/2020-11-12T13:34:38/) |
+| 80                      | 25,000              | 520              | 135                                | 0              | [output](https://console.cloud.google.com/storage/browser/eq-stress-test-load-injectors-benchmark-outputs/stress-test-november-2020/2020-11-12T13:56:58/) |
+| 90                      | 28,500              | 580              | 135                                | 0              | [output](https://console.cloud.google.com/storage/browser/eq-stress-test-load-injectors-benchmark-outputs/stress-test-november-2020/2020-11-12T14:19:57/) |
+| 100                     | 31,500              | 650              | 135                                | 0              | [output](https://console.cloud.google.com/storage/browser/eq-stress-test-load-injectors-benchmark-outputs/stress-test-november-2020/2020-11-12T14:43:17/) |
+| 110                     | 35,000              | 720              | 135                                | 0              | [output](https://console.cloud.google.com/storage/browser/eq-stress-test-load-injectors-benchmark-outputs/stress-test-november-2020/2020-11-12T15:05:19/) |
+| 120                     | 38,000              | 780              | 135                                | 0              | [output](https://console.cloud.google.com/storage/browser/eq-stress-test-load-injectors-benchmark-outputs/stress-test-november-2020/2020-11-12T15:27:28/) |
+| 130                     | 41,000              | 850              | 135                                | 0              | [output](https://console.cloud.google.com/storage/browser/eq-stress-test-load-injectors-benchmark-outputs/stress-test-november-2020/2020-11-12T15:49:57/) |
+| 140                     | 44,500              | 920              | 140                                | 0              | [output](https://console.cloud.google.com/storage/browser/eq-stress-test-load-injectors-benchmark-outputs/stress-test-november-2020/2020-11-12T16:12:18/) |
+| 150                     | 47,500              | 990              | 145                                | 0              | [output](https://console.cloud.google.com/storage/browser/eq-stress-test-load-injectors-benchmark-outputs/stress-test-november-2020/2020-11-12T16:34:47/) |
+| 160                     | 50,000              | 1070             | 155                                | 0              | [output](https://console.cloud.google.com/storage/browser/eq-stress-test-load-injectors-benchmark-outputs/stress-test-november-2020/2020-11-12T16:57:27/) |
+| 170                     | 53,500              | 1150             | 175                                | 0.00000009 (6) | [output](https://console.cloud.google.com/storage/browser/eq-stress-test-load-injectors-benchmark-outputs/stress-test-november-2020/2020-11-12T17:20:17/) |
+| 180                     | 56,500              | 1220             | 195                                | 0.0000003 (15) | [output](https://console.cloud.google.com/storage/browser/eq-stress-test-load-injectors-benchmark-outputs/stress-test-november-2020/2020-11-12T17:42:51/) |
+| 190                     | 59,500              | 1300             | 230                                | 0.0000002 (12) | [output](https://console.cloud.google.com/storage/browser/eq-stress-test-load-injectors-benchmark-outputs/stress-test-november-2020/2020-11-12T18:06:27/) |
+| 200                     | 63,000              | 1390             | 270                                | 0.0000002 (17) | [output](https://console.cloud.google.com/storage/browser/eq-stress-test-load-injectors-benchmark-outputs/stress-test-november-2020/2020-11-12T18:29:30/) |
+| 210                     | 65,000              | 1460             | 320                                | 0              | [output](https://console.cloud.google.com/storage/browser/eq-stress-test-load-injectors-benchmark-outputs/stress-test-november-2020/2020-11-12T18:51:57/) |
+| 220                     | 67,500              | 1530             | 390                                | 0              | [output](https://console.cloud.google.com/storage/browser/eq-stress-test-load-injectors-benchmark-outputs/stress-test-november-2020/2020-11-12T19:14:59/) |
+| 230                     | 70,000              | 1600             | 500                                | 0              | [output](https://console.cloud.google.com/storage/browser/eq-stress-test-load-injectors-benchmark-outputs/stress-test-november-2020/2020-11-12T19:37:18/) |
+| 240                     | 72,000              | 1660             | 750                                | 0              | [output](https://console.cloud.google.com/storage/browser/eq-stress-test-load-injectors-benchmark-outputs/stress-test-november-2020/2020-11-12T19:59:47/) |
+| 250                     | 74,000              | 1710             | 1000                               | 0              | [output](https://console.cloud.google.com/storage/browser/eq-stress-test-load-injectors-benchmark-outputs/stress-test-november-2020/2020-11-12T20:22:28/) |
 
 - Error rate includes any HTTP status codes in the 400 and 500 range (neither are expected)
 - The 99th percentile timings are the load balancer response times reported in Stackdriver
@@ -61,7 +62,7 @@ Benchmark version: [v1.0.0](https://github.com/ONSdigital/eq-survey-runner-bench
 - The zero status code errors from Locust are assumed to be from Locust issues
 - 50 HTTP 500 errors reported in GCP (by the load balancer and application)
 - All HTTP 500 errors happened when submitting to GCS, reported by the application logs as:
-        
+
         "Traceback (most recent call last):",
         "  File '/usr/local/lib/python3.8/site-packages/flask/app.py', line 1950, in full_dispatch_request",
         "    rv = self.dispatch_request()",
@@ -103,7 +104,7 @@ Benchmark version: [v1.0.0](https://github.com/ONSdigital/eq-survey-runner-bench
 
 ## Observations
 
-- As sessions are stored in Datastore again, Redis was under much less load. This was the main contributing factor to a request rate of double the previous limit reached (74,000 rps vs 34,000 rps). 
+- As sessions are stored in Datastore again, Redis was under much less load. This was the main contributing factor to a request rate of double the previous limit reached (74,000 rps vs 34,000 rps).
 - Redis only reached a peak of 11% CPU usage and 6,400 connected clients.
 - The error rate was very low. The errors happened in the middle of the test, for 4 of 20 test runs, after that there were 5 test runs with no errors. This may have been due to GCS scaling issues.
 - The previous Datastore errors did not occur, this looks to have been fixed by switching from HTTP to gRPC for Datastore calls.

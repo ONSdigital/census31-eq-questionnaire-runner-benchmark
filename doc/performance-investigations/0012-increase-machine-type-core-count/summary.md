@@ -5,7 +5,7 @@ EQ Runner currently uses a machine type of `custom-4-4096` (4 vCPU cores, 4096MB
 ## Benchmark profile
 
 | Option                 | Value                        |
-| ---------------------- | ---------------------------- |
+|------------------------|------------------------------|
 | Requests file          | census_household_gb_eng.json |
 | Run time               | 20m                          |
 | User wait time minimum | 1                            |
@@ -19,7 +19,7 @@ This test replicates the current settings for the daily test.
 ## Results
 
 | Cores | Pods | Nodes | GET Average | POST Average | All Request Average | Total Requests |
-| ----- | ---- | ----- | ----------- | ------------ | ------------------- | -------------- |
+|-------|------|-------|-------------|--------------|---------------------|----------------|
 | 4     | 4    | 4     | 572         | 609          | 590                 | 403,890        |
 | 8     | 4    | 2     | 542         | 579          | 560                 | 404,535        |
 | 16    | 4    | 1     | 620         | 651          | 636                 | 379,246        |
@@ -28,7 +28,7 @@ This test replicates the current settings for the daily test.
 In addition, a test was run against a node provisioned using a C type machine. C type machines have better per-core clock speeds, making them ideal for single-threaded applications. These tests were run with 64 clients.
 
 | Architecture | Cores | Pods | Nodes | GET Average | POST Average | All Request Average | Total Requests |
-| ------------ | ----- | ---- | ----- | ----------- | ------------ | ------------------- | -------------- |
+|--------------|-------|------|-------|-------------|--------------|---------------------|----------------|
 | Default      | 4     | 1    | 1     | 239         | 288          | 263                 | 128,808        |
 | C Type       | 4     | 1    | 1     | 136         | 113          | 125                 | 139,227        |
 

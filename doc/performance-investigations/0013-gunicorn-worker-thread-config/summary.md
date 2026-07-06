@@ -1,7 +1,7 @@
 # Gunicorn worker and thread count configuration
 
 Questionnaire runner currently uses the formula `(2 x $num_cores) + 1` when configuring the number of Gunicorn workers and threads. This results in 7 workers by 7 threads for our current vCPU count of 3.
-This document highlights the results from running the application with different numbers of workers and thread permutations. Both workers and threads ranged from 1 to 10. 
+This document highlights the results from running the application with different numbers of workers and thread permutations. Both workers and threads ranged from 1 to 10.
 
 ## Benchmark profile
 
@@ -53,50 +53,51 @@ The table below compares the current configuration of 7 workers by 7 threads wit
 ### Performance comparison of thread counts
 
 The following results were omitted because the 99th percentile response was above 500ms:
+
 1. All workers with a thread count of 1
 2. All permutations of 1 and 2 workers.
 
 #### Workers: 3
 
-![](images/performance_graph_workers3.png)
+![Figure](images/performance_graph_workers3.png)
 
 #### Workers: 4
 
-![](images/performance_graph_workers4.png)
+![Figure](images/performance_graph_workers4.png)
 
 #### Workers: 5
 
-![](images/performance_graph_workers5.png)
+![Figure](images/performance_graph_workers5.png)
 
 #### Workers: 6
 
-![](images/performance_graph_workers6.png)
+![Figure](images/performance_graph_workers6.png)
 
 #### Workers: 7
 
-![](images/performance_graph_workers7.png)
+![Figure](images/performance_graph_workers7.png)
 
 #### Workers: 8
 
-![](images/performance_graph_workers8.png)
+![Figure](images/performance_graph_workers8.png)
 
 #### Workers: 9
 
-![](images/performance_graph_workers9.png)
+![Figure](images/performance_graph_workers9.png)
 
 #### Workers: 10
 
-![](images/performance_graph_workers10.png)
+![Figure](images/performance_graph_workers10.png)
 
 #### Comparison of the 99th percentile between worker and thread counts
 
-![](images/performance_graph_workers_by_threads.png)
+![Figure](images/performance_graph_workers_by_threads.png)
 
 ### Comparison of the 99th percentile between workers with a thread count of 2
 
 The performance of the app does not seem to get noticeably better past 2 threads. The graph below highlights the performance of different workers under 2 threads over 3 runs.
 
-![](images/performance_graph_workers_by_2_threads_99th_avg.png)
+![Figure](images/performance_graph_workers_by_2_threads_99th_avg.png)
 
 ## Observations
 
@@ -106,7 +107,8 @@ The performance of the app does not seem to get noticeably better past 2 threads
 - More than 4 workers does not seem to have any significant improvement in response times.
 
 ## Decision
+
 - Since different configurations have different pros and cons for different percentiles, a few different worker/thread configurations should be tested further in small scale stress tests:
-  - Compare a baseline of 7 workers with 7 threads vs 7 workers with 2 threads, until the 99th percentile reaches 1 second. 
+  - Compare a baseline of 7 workers with 7 threads vs 7 workers with 2 threads, until the 99th percentile reaches 1 second.
   - Following on from that, run a test with a reduced number of workers.
 - Run a stress test to discover how these new configurations compare at higher loads.
