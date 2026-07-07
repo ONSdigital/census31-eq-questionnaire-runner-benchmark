@@ -168,7 +168,7 @@ Observations:
 * `xhtml2pdf` is more lightweight than `weasyprint`, resulting in lower CPU usage and potentially better overall
   application performance under load.
 
-### Considerations
+### Considerations (Option 3)
 
 * This is a big one - it is not as CSS-compliant as `weasyprint`, and has limited support for modern CSS features - it
   uses a small subset of CSS.
