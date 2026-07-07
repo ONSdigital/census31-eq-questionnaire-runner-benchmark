@@ -6,7 +6,7 @@ Deploying and destroying the infrastructure is possible via Concourse tasks.
 
 Log in (via `fly`) to a Concourse instance that has access to the target GCP project:
 
-```sh
+```shell
 fly login -t <target-concourse>
 ```
 
@@ -35,7 +35,7 @@ The following env var already has a sensible default, but can be set with an alt
 
 Use the `fly execute` command to run the task.
 
-```sh
+```shell
 PROJECT_ID=<project_id> \
 REQUESTS_JSON=<path_to_requests_file> \
 LOCUST_OPTIONS=<additional_locust_option> \
@@ -70,7 +70,7 @@ The following env var already has a sensible default, but can be set with an alt
 
 Use the `fly execute` command to run the task.
 
-```sh
+```shell
 OUTPUT_DIR=<output_directory> \
 SLACK_CHANNEL_ID=<slack_channel_id> \
 fly -t census-eq execute \

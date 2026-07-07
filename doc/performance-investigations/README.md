@@ -18,13 +18,13 @@ Depending on the duration of the tests, you may want to consider running them mo
 
 The simplest configuration to run is captured in `run.sh` which defaults to one client with no wait time:
 
-```sh
+```shell
 ./run.sh requests/<requests_file> https://<runner_url> <duration> <output_file_prefix>
 ```
 
 `duration` can be in seconds (s), minutes (m), or hours (h). For example:
 
-```sh
+```shell
 ./run.sh requests/test_checkbox https://runner.co.uk 10m baseline
 ```
 
@@ -54,13 +54,13 @@ outputs/
 
 To get a summary for each dated folder, run the following:
 
-```sh
+```shell
 OUTPUT_DIR=outputs/baseline poetry run python -m scripts.get_summary
 ```
 
 To get an aggregated summary for all dated folders, run the following:
 
-```sh
+```shell
 OUTPUT_DIR=outputs/baseline poetry run python -m scripts.get_aggregated_summary
 ```
 
