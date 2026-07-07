@@ -162,7 +162,7 @@ Observations:
 
 ## Option 3: Move to xhtml2pdf
 
-### Advantages
+### Advantages (Option 3)
 
 * By far the best performance of the three options tested here
 * `xhtml2pdf` is more lightweight than `weasyprint`, resulting in lower CPU usage and potentially better overall
