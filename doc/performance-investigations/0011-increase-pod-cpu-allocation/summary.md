@@ -29,7 +29,8 @@ a single runner instance per node. Future performance investigations will look a
 
 ## Fluentd Performance
 
-Fluentd pods were observed to be using around 450 mCPU when under sustained load. Their requested cpu time is only 100 mCPU. Metrics gathered during recent stress tests show similar levels of CPU resource usage. Unfortunately, it was not feasible to measure the impact disabling app logging has at the cluster level; all of the tests run with fluentd disabled had multiple `kube-system` pods on Runner nodes. It is likely that the increase in CPU resource used by fluentd under high load has a negative impact on response times. It may be
+Fluentd pods were observed to be using around 450 mCPU when under sustained load. Their requested cpu time is only 100 mCPU. Metrics gathered during recent stress tests show similar levels of CPU resource usage.
+Unfortunately, it was not feasible to measure the impact disabling app logging has at the cluster level; all of the tests run with fluentd disabled had multiple `kube-system` pods on Runner nodes. It is likely that the increase in CPU resource used by fluentd under high load has a negative impact on response times. It may be
 beneficial to look at fluentd performance tuning.
 
 ## Decision

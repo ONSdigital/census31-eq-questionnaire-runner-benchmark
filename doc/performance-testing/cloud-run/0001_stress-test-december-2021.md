@@ -71,7 +71,8 @@
 
 ## Additional tests
 
-Following our initial stress test we decided to run an additional test to prove that performance stays on similar levels when we fine tune runner's concurrency. Based on the table above we made an assumption that if we set concurrency to 90 we should get similar results. In addition, if we update number of min. max instances to 2 and double the number of clients per instance we should also obtain similar results.
+Following our initial stress test we decided to run an additional test to prove that performance stays on similar levels when we fine tune runner's concurrency.
+Based on the table above we made an assumption that if we set concurrency to 90 we should get similar results. In addition, if we update number of min. max instances to 2 and double the number of clients per instance we should also obtain similar results.
 
 ## Comparison
 

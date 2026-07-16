@@ -63,4 +63,5 @@ Breakdown of benchmark business journey endpoints based on 99th percentile timin
 
 ## Decision
 
-Compared to checkbox journey that we use in daily tests, there is a substantial rise in response times on certain endpoints, `/session` being affected the most but to a lesser degree `/questionnaire/submit/` and `/submitted/view-response/`. It could be down to the fact that business journey is substantially bigger and more extensive than the checkbox one. No anomaly (or a way to remedy this) was discovered in Grafana dashboards charts and all other GET and POST request perform well so no further investigation is needed. The benchmark business journey can be utilised for future daily performance tests.
+Compared to checkbox journey that we use in daily tests, there is a substantial rise in response times on certain endpoints, `/session` being affected the most but to a lesser degree `/questionnaire/submit/` and `/submitted/view-response/`. It could be down to the fact that business journey is substantially bigger and more extensive than the checkbox one.
+No anomaly (or a way to remedy this) was discovered in Grafana dashboards charts and all other GET and POST request perform well so no further investigation is needed. The benchmark business journey can be utilised for future daily performance tests.

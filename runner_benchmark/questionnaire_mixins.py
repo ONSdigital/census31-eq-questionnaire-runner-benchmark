@@ -42,7 +42,10 @@ class QuestionnaireMixins:
             catch_response=True,
         ) as response:
             if response.status_code != 302:
-                error = f"Expected a (302) but got a ({response.status_code}) back when posting page: {request_url} with data: {data}"
+                error = (
+                    f"Expected a (302) but got a ({response.status_code}) back when "
+                    f"posting page: {request_url} with data: {data}"
+                )
                 response.failure(error)
                 raise Exception(error)
 
