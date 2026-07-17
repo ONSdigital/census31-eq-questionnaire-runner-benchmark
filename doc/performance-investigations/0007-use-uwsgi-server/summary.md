@@ -2,18 +2,18 @@
 
 We have only ever run the application with Gunicorn. We should try another web server to see if it is more performant, reliable or consistent.
 
-https://github.com/ONSdigital/eq-questionnaire-runner/compare/add-uwsgi-option
+<https://github.com/ONSdigital/eq-questionnaire-runner/compare/add-uwsgi-option>
 
 ## Benchmark profile
 
-| Option | Value |
-|--------|-------|
-| Requests file | census_household_gb_eng.json |
-| Run time | 10m |
-| User wait time minimum | 1 |
-| User wait time maximum | 2 |
-| Clients | 64 |
-| Hatch rate | 64 |
+| Option                 | Value                        |
+|------------------------|------------------------------|
+| Requests file          | census_household_gb_eng.json |
+| Run time               | 10m                          |
+| User wait time minimum | 1                            |
+| User wait time maximum | 2                            |
+| Clients                | 64                           |
+| Hatch rate             | 64                           |
 
 This test replicates the current seetings for the daily test, but with a reduced runtime to allow for all of the variations to be tested in a reasonable time.
 
@@ -43,7 +43,7 @@ This test replicates the current seetings for the daily test, but with a reduced
 
 - The timings for uWSGI without threads is better than Gunicorn, with lower higher percentile timings.
 - The timing for threaded uWSGI seems high, but this could be due to configuring too many threads. Given the reasonable timings for the non-threaded UWSGI, we should try a smaller number of threads.
-- The timings for uWSGI async 20 cores are far lower than everything else at the higher percentiles. 
+- The timings for uWSGI async 20 cores are far lower than everything else at the higher percentiles.
 - We haven't looked into the Gunicorn tuning options
 - Gunicorn is the only option that didn't generate errors
 

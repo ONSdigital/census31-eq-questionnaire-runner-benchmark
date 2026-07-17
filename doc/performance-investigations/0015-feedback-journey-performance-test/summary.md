@@ -4,47 +4,47 @@ This test is to investigate the performance of feedback journey. Limit of feedba
 
 ## Benchmark version
 
-| Tag | Commit |
-|--------|-------|
-| feedback-performance-investigation  | 38ae1812858d9b1a4d204fc336adad6a63831f1c
+| Tag                                | Commit                                   |
+|------------------------------------|------------------------------------------|
+| feedback-performance-investigation | 38ae1812858d9b1a4d204fc336adad6a63831f1c |
 
 ## Benchmark profile
 
-| Option | Value |
-|--------|-------|
-| Requests file | census_household_gb_eng.json |
-| Run time | 30 min |
-| User wait time minimum | 1 |
-| User wait time maximum | 2 |
-| Clients | 144 |
-| Hatch rate | 144 |
-| Locust Instances | 1 |
+| Option                 | Value                        |
+|------------------------|------------------------------|
+| Requests file          | census_household_gb_eng.json |
+| Run time               | 30 min                       |
+| User wait time minimum | 1                            |
+| User wait time maximum | 2                            |
+| Clients                | 144                          |
+| Hatch rate             | 144                          |
+| Locust Instances       | 1                            |
 
 ## Results
 
 Results based on 99th percentile timings.
 
-| Metric | Baseline | Investigation |
-|--------|----------|---------------|
-| Questionnaire GETs | 118 | 74 |
-| Questionnaire POSTs | 141 | 121 |
-| All requests | 129 | 86 |
-| Total requests (over 20 mins) | 1,924,318 | 1,484,407 |
+| Metric                        | Baseline  | Investigation |
+|-------------------------------|-----------|---------------|
+| Questionnaire GETs            | 118       | 74            |
+| Questionnaire POSTs           | 141       | 121           |
+| All requests                  | 129       | 86            |
+| Total requests (over 20 mins) | 1,924,318 | 1,484,407     |
 
 Breakdown of feedback journey endpoints based on 99th percentile timings.
 
-| Type | Name | Average response time |
-|-----|----------------|----|
-| GET | /questionnaire | 91 |
-| GET | /questionnaire/feedback/ | 100 |
-| POST | /questionnaire/feedback/ | 120 |
-| GET | /questionnaire/summary/ | 91 |
-| POST | /questionnaire/summary/ | 185 |
-| GET | /session | 240 |
-| GET | /submitted/feedback/send | 67 |
-| POST | /submitted/feedback/send | 108 |
-| GET | /submitted/feedback/sent | 55 |
-| GET | /submitted/thank-you/ | 59 |
+| Type | Name                     | Average response time |
+|------|--------------------------|-----------------------|
+| GET  | /questionnaire           | 91                    |
+| GET  | /questionnaire/feedback/ | 100                   |
+| POST | /questionnaire/feedback/ | 120                   |
+| GET  | /questionnaire/summary/  | 91                    |
+| POST | /questionnaire/summary/  | 185                   |
+| GET  | /session                 | 240                   |
+| GET  | /submitted/feedback/send | 67                    |
+| POST | /submitted/feedback/send | 108                   |
+| GET  | /submitted/feedback/sent | 55                    |
+| GET  | /submitted/thank-you/    | 59                    |
 
 ## Decision
 

@@ -8,22 +8,22 @@ Link to Github branch with proposed changes.
 
 | Option                 | Value |
 |------------------------|-------|
-| Requests file          | |
-| Run time               | |
-| User wait time minimum | |
-| User wait time maximum | |
-| Clients                | |
-| Spawn rate             | |
+| Requests file          |       |
+| Run time               |       |
+| User wait time minimum |       |
+| User wait time maximum |       |
+| Clients                |       |
+| Spawn rate             |       |
 
 ## Results
 
 Results based on 99th percentile timings.
 
-| Metric | Baseline | Investigation |
-|--------|----------|--------------|
-| Questionnaire GETs | | |
-| Questionnaire POSTs | | |
-| All requests | | |
+| Metric              | Baseline | Investigation |
+|---------------------|----------|---------------|
+| Questionnaire GETs  |          |               |
+| Questionnaire POSTs |          |               |
+| All requests        |          |               |
 
 ## Decision
 

@@ -471,7 +471,7 @@
                 "anyone-else": "No"
             }
         },
-         {
+        {
             "method": "GET",
             "url": "/questionnaire/relationships/",
             "redirect_route": "/questionnaire/relationships/{person_1_list_id}/to/{person_2_list_id}/"

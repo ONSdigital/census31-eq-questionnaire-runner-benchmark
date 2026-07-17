@@ -4,26 +4,26 @@ A September 2020 scale test was carried out against Runner v3.48.0 with eq-sessi
 
 ## Benchmark settings
 
-| Setting | Value |
-| --- | ---| 
-| Clients per instance | 200 |
-| Clients hatch rate   | 200 |
-| Wait time minimum | 1 |
-| Wait time maximum | 2 |
-| Requests JSON | census_household_gb_eng.json |
-| Runtime | 20m |
+| Setting              | Value                        |
+|----------------------|------------------------------|
+| Clients per instance | 200                          |
+| Clients hatch rate   | 200                          |
+| Wait time minimum    | 1                            |
+| Wait time maximum    | 2                            |
+| Requests JSON        | census_household_gb_eng.json |
+| Runtime              | 20m                          |
 
 ## Results
 
-| Load injector instances | Requests per second | CPU Usage (vCPU) | 99th percentile response time (ms) | Error rate (%) | Output |
-| --- | --- | --- | --- | --- | --- |
-| 60 |18,500|398|109|0.00002|[output](https://console.cloud.google.com/storage/browser/eq-stress-test-load-injectors-benchmark-outputs/stress-test/2020-09-29T07:22:43)|
-| 70 |21,500|470|115|0.00006|[output](https://console.cloud.google.com/storage/browser/eq-stress-test-load-injectors-benchmark-outputs/stress-test/2020-09-29T07:45:53)|
-| 80 |24,500|535|112 |0.00003|[output](https://console.cloud.google.com/storage/browser/eq-stress-test-load-injectors-benchmark-outputs/stress-test/2020-09-29T08:07:56)|
-| 90 |28,800|600|109|0.00003|[output](https://console.cloud.google.com/storage/browser/eq-stress-test-load-injectors-benchmark-outputs/stress-test/2020-09-29T08:30:03)|
-| 100 |30,500|666|112|0.00002|[output](https://console.cloud.google.com/storage/browser/eq-stress-test-load-injectors-benchmark-outputs/stress-test/2020-09-29T08:52:07)|
-| 110 |34,000|750|125|0.00007|[output](https://console.cloud.google.com/storage/browser/eq-stress-test-load-injectors-benchmark-outputs/stress-test/2020-09-29T09:14:23)|
-| 120 |37,000|802|115|0.00004|[output](https://console.cloud.google.com/storage/browser/eq-stress-test-load-injectors-benchmark-outputs/stress-test/2020-09-29T09:37:14)|
+| Load injector instances | Requests per second | CPU Usage (vCPU) | 99th percentile response time (ms) | Error rate (%) | Output                                                                                                                                     |
+|-------------------------|---------------------|------------------|------------------------------------|----------------|--------------------------------------------------------------------------------------------------------------------------------------------|
+| 60                      | 18,500              | 398              | 109                                | 0.00002        | [output](https://console.cloud.google.com/storage/browser/eq-stress-test-load-injectors-benchmark-outputs/stress-test/2020-09-29T07:22:43) |
+| 70                      | 21,500              | 470              | 115                                | 0.00006        | [output](https://console.cloud.google.com/storage/browser/eq-stress-test-load-injectors-benchmark-outputs/stress-test/2020-09-29T07:45:53) |
+| 80                      | 24,500              | 535              | 112                                | 0.00003        | [output](https://console.cloud.google.com/storage/browser/eq-stress-test-load-injectors-benchmark-outputs/stress-test/2020-09-29T08:07:56) |
+| 90                      | 28,800              | 600              | 109                                | 0.00003        | [output](https://console.cloud.google.com/storage/browser/eq-stress-test-load-injectors-benchmark-outputs/stress-test/2020-09-29T08:30:03) |
+| 100                     | 30,500              | 666              | 112                                | 0.00002        | [output](https://console.cloud.google.com/storage/browser/eq-stress-test-load-injectors-benchmark-outputs/stress-test/2020-09-29T08:52:07) |
+| 110                     | 34,000              | 750              | 125                                | 0.00007        | [output](https://console.cloud.google.com/storage/browser/eq-stress-test-load-injectors-benchmark-outputs/stress-test/2020-09-29T09:14:23) |
+| 120                     | 37,000              | 802              | 115                                | 0.00004        | [output](https://console.cloud.google.com/storage/browser/eq-stress-test-load-injectors-benchmark-outputs/stress-test/2020-09-29T09:37:14) |
 
 - 600 Runner instances limit, 2400 vCPU available, 1800 vCPU usable (3 of 4 cores)
 - 599 Runner instances reached, 1797 vCPU requested, 802 vCPU used (45%)
@@ -36,7 +36,7 @@ A September 2020 scale test was carried out against Runner v3.48.0 with eq-sessi
 - The number of Locust failures (105) correlates with the errors we see in the load balancer and application logs and are detailed below
 - HTTP 500 errors (105) reported by load_balancer as `statusDetails: "response_sent_by_backend"`
 - HTTP 500 errors (92) reported by the application logs:
-        
+
         77: "  File '/usr/local/lib/python3.8/site-packages/google/cloud/datastore/_http.py', line 70, in _request"
         78: "    response = http.request(url=api_url, method='POST', headers=headers, data=data)"
         85: "  File '/usr/local/lib/python3.8/site-packages/requests/adapters.py', line 498, in send"
