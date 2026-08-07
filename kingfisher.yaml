@@ -1,0 +1,4 @@
+filters:
+  exclude:
+    - doc/
+    - jwt-test-keys/
