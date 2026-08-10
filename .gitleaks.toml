@@ -1,0 +1,3 @@
+[allowlist]
+description = "Ignore test keys directory"
+paths = ['''jwt-test-keys''']

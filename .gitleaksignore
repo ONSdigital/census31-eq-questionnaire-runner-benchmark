@@ -1,5 +1,0 @@
-# False positives - KID is a key identifier, not a secret
-f3d09cb41614a125b4f18de734aab7c47a38465d:runner_benchmark/token_generator.py:generic-api-key:11
-c010ef967e08092399980fea3d298a8a4cf96e28:runner_benchmark/token_generator.py:generic-api-key:11
-# Test key used for JWT signing in local/CI test environments
-c010ef967e08092399980fea3d298a8a4cf96e28:jwt-test-keys/sdc-user-authentication-signing-rrm-private-key.pem:private-key:1
