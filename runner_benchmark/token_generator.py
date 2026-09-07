@@ -9,10 +9,10 @@ from sdc.crypto.key_store import KeyStore
 KEY_PURPOSE_AUTHENTICATION = "authentication"
 
 EQ_USER_AUTHENTICATION_RRM_PRIVATE_KEY_KID = (
-    "709eb42cfee5570058ce0711f730bfbb7d4c8ade"  # gitleaks:allow
+    "709eb42cfee5570058ce0711f730bfbb7d4c8ade"
 )
 SR_USER_AUTHENTICATION_PUBLIC_KEY_KID = (
-    "e19091072f920cbf3ca9f436ceba309e7d814a62"  # gitleaks:allow
+    "e19091072f920cbf3ca9f436ceba309e7d814a62"
 )
 
 KEYS_FOLDER = "./jwt-test-keys"
