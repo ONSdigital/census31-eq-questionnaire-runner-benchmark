@@ -29,6 +29,8 @@ DISABLE_LINTERS:
   - REPOSITORY_KINGFISHER # Only produced false positives on benchmark CSV data; overlaps with betterleaks/secretlint
   - REPOSITORY_GRYPE # 52s; vulnerability scanning covered by trivy and osv-scanner
   - REPOSITORY_TRIVY_SBOM # Redundant with syft
+  - REPOSITORY_OSV_SCANNER # Gives little value alongside dependabot CTE-339. Possibly to be reintroduced closer to release
+  - REPOSITORY_TRIVY # Gives little value alongside dependabot CTE-339. Possibly to be reintroduced closer to release
 
 ACTION_ZIZMOR_UNSECURED_ENV_VARIABLES:
   - GITHUB_TOKEN
